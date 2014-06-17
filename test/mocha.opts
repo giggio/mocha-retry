@@ -1,5 +1,5 @@
 --compilers coffee:coffee-script/register
---ui /home/giovanni/proj/rabiscos/retrymocha/bddRetryInterface
+--ui mocharetry
 --timeout 1000
 --reporter spec
 --recursive
