@@ -25,11 +25,27 @@ most of the issues caused by the inherent instability of such tests, but some ar
 
 ### Using it
 
-You can specify the retry count like this:
+You can specify the retry count on the test directly like this:
 
 ```coffeescript
-it 2, 'works', ->
+it 2, 'a test', ->
   #your test goes here, it will be retried at most twice
+```
+
+Or you can specify the retry count on the suite, like this:
+
+```coffeescript
+describe 4, 'some suite', ->
+  it 'a test', ->
+    #your test goes here, it will be retried at most twice
+```
+
+If you specify both the test has precedence. This test will be retried at most twice, not 4 times:
+
+```coffeescript
+describe 4, 'some suite', ->
+  it 2, 'a test', ->
+    #your test goes here, it will be retried at most twice
 ```
 
 You can still use the default `it` behaviour, without retry, just do not specify a retry as you normally would on a Mocha test.

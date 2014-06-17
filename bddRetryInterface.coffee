@@ -16,8 +16,12 @@ module.exports = interfaces.bddretry = (suite) ->
     
     context.afterEach = (name, fn) -> suites[0].afterEach name, fn
     
-    context.describe = context.context = (title, fn) ->
+    context.describe = context.context = (times, title, fn) ->
+      unless fn?
+        [title, fn] = [times, title]
+        times = undefined
       asuite = Suite.create(suites[0], title)
+      asuite.times = times
       asuite.file = file
       suites.unshift asuite
       fn.call asuite
@@ -40,7 +44,8 @@ module.exports = interfaces.bddretry = (suite) ->
       asuite = suites[0]
       unless fn?
         [title, fn] = [times, title]
-        times = 1
+        times = if asuite.times? then asuite.times else 1
+
       fn = null if asuite.pending
       test = new RetryTest times, title, fn
       test.file = file
