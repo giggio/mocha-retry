@@ -1,14 +1,16 @@
 {
-  "name": "retrymocha",
-  "version": "0.0.0",
-  "description": "",
+  "name": "mocha-retry",
+  "version": "0.0.1",
+  "description": "a way to retry tests",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "author": "Giovanni Bassi <giggio@giggio.net>",
   "license": "ISC",
+  "peerDependencies": {
+    "mocha": "^1.20.1"
+  },
   "dependencies": {
+  },
+  "devDependencies": {
     "mocha": "^1.20.1",
     "coffee-script": "^1.7.1",
     "q": "^1.0.1",
