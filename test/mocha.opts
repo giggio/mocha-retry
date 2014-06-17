@@ -1,0 +1,5 @@
+--compilers coffee:coffee-script/register
+--ui /home/giovanni/proj/rabiscos/retrymocha/bddRetryInterface
+--timeout 1000
+--reporter spec
+--recursive
