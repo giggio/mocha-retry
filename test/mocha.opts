@@ -1,5 +1,5 @@
 --compilers coffee:coffee-script/register
---ui mocharetry
+--ui mocha-retry
 --timeout 1000
 --reporter spec
 --recursive
