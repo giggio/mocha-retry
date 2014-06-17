@@ -5,6 +5,10 @@
   "main": "index.js",
   "author": "Giovanni Bassi <giggio@giggio.net>",
   "license": "GPLv2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/giggio/mocha-retry"
+  },
   "peerDependencies": {
     "mocha": "^1.20.1"
   },
