@@ -28,34 +28,41 @@ module.exports = interfaces.bddretry = (suite) ->
       suites.shift()
       asuite
 
-    context.xdescribe = context.xcontext = context.describe.skip = (title, fn) ->
+    context.xdescribe = context.xcontext = context.describe.skip = (times, title, fn) ->
+      unless fn?
+        [title, fn] = [times, title]
+        times = undefined
       asuite = Suite.create(suites[0], title)
       asuite.pending = true
       suites.unshift asuite
       fn.call asuite
       suites.shift()
 
-    context.describe.only = (title, fn) ->
-      asuite = context.describe title, fn
+    context.describe.only = (times, title, fn) ->
+      asuite = context.describe times, title, fn
       mocha.grep asuite.fullTitle()
       asuite
 
     context.it = context.itretry = (times, title, fn) ->
       asuite = suites[0]
-      unless fn?
+      if !fn? and typeof times isnt 'number'
         [title, fn] = [times, title]
         times = if asuite.times? then asuite.times else 1
-
       fn = null if asuite.pending
       test = new RetryTest times, title, fn
       test.file = file
       asuite.addTest test
       test
     
-    context.it.only = (title, fn) ->
-      test = context.it title, fn
+    context.it.only = (times, title, fn) ->
+      test = context.it times, title, fn
       reString = "^" + utils.escapeRegexp(test.fullTitle()) + "$"
       mocha.grep new RegExp(reString)
       test
 
-    context.xit = context.xspecify = context.it.skip = (title) -> context.it title
+    context.xit = context.xspecify = context.it.skip = (times, title, fn) ->
+      unless title?
+        return context.it times
+      unless fn?
+        [times, title, fn] = [1, times, title]
+      context.it times, title

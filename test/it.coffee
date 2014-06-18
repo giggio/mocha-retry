@@ -18,6 +18,13 @@ describe 'A suite with tests with retry', ->
     if times % 2 isnt 0
       return done new Error "not even"
     done()
+  it.skip 3, 'a test that will not run', ->
+  it.skip 'another test that will not run', ->
+  #it.only 'some only test', -> true
+  #it.only 2, 'an only test', ->
+    #times++
+    #if times % 2 isnt 0 then throw new Error "not even"
+
 describe 'Some non retry suite with before', ->
   valueAll = valueEach = undefined
   before -> valueAll = true
@@ -31,6 +38,7 @@ describe 'Some non retry suite with before', ->
     valueEach.should.be.true
     valueAll.should.be.true
     done()
+
 describe 'Some retry suite with before with retry on tests', ->
   valueAll = valueEach = undefined
   before -> valueAll = true
