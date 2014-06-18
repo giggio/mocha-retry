@@ -21,6 +21,8 @@ module.exports = interfaces.bddretry = (suite) ->
       unless fn?
         [title, fn] = [times, title]
         times = undefined
+      if suites[0].times? and !times?
+        times = suites[0].times
       asuite = Suite.create(suites[0], title)
       asuite.times = times
       asuite.file = file

@@ -75,3 +75,31 @@ describe.skip 2, 'A skipped retry suite', ->
   it 'a test that will not run', ->
 describe.skip 'A skipped non retry suite', ->
   it 'another test that will not run', ->
+
+describe 2, 'A retry suite with a sub suite', ->
+  describe 'A sub suite without retry defined', ->
+    before -> times = 0
+    it 'works with a retried test not async', ->
+      times++
+      if times % 2 isnt 0 then throw new Error "not even"
+    it 'works with a retried test with a promise', ->
+      times++
+      Q.fcall -> if times % 2 isnt 0 then throw new Error "not even"
+    it 'works with a retried test with callback', (done) ->
+      times++
+      if times % 2 isnt 0
+        return done new Error "not even"
+      done()
+  describe 3, 'A sub suite with retry redefined', ->
+    before -> times = 0
+    it 'works with a retried test not async', ->
+      times++
+      if times % 3 isnt 0 then throw new Error "not divisible by 3"
+    it 'works with a retried test with a promise', ->
+      times++
+      Q.fcall -> if times % 3 isnt 0 then throw new Error "not divisible by 3"
+    it 'works with a retried test with callback', (done) ->
+      times++
+      if times % 3 isnt 0
+        return done new Error "not divisible by 3"
+      done()
