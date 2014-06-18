@@ -3,18 +3,19 @@ Mocha = require 'mocha'
 interfaces = Mocha.interfaces
 Suite = Mocha.Suite
 utils = Mocha.utils
+require './retrySuite'
 
 module.exports = interfaces.bddretry = (suite) ->
   suites = [suite]
   suite.on "pre-require", (context, file, mocha) ->
     
-    context.before = (name, fn) -> suites[0].beforeAll name, fn
+    context.before = (times, name, fn) -> suites[0].beforeAllWithRetry times, name, fn
     
-    context.after = (name, fn) -> suites[0].afterAll name, fn
+    context.after = (times, name, fn) -> suites[0].afterAllWithRetry times, name, fn
     
-    context.beforeEach = (name, fn) -> suites[0].beforeEach name, fn
+    context.beforeEach = (times, name, fn) -> suites[0].beforeEachWithRetry times, name, fn
     
-    context.afterEach = (name, fn) -> suites[0].afterEach name, fn
+    context.afterEach = (times, name, fn) -> suites[0].afterEachWithRetry times, name, fn
     
     context.describe = context.context = (times, title, fn) ->
       unless fn?
