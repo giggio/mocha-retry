@@ -1,6 +1,6 @@
 RetryHook = (times, title, fn) ->
   Runnable.call @, title, fn
-  @times = times
+  @times = times or 1
   @type = "hook"
 
 RetryHook::error = (err) ->
