@@ -1,6 +1,4 @@
 Q = require 'q'
-chai = require 'chai'
-chai.should()
 times = 0
 
 describe 'Some suite with after and no retry', ->

@@ -1,6 +1,6 @@
 {
   "name": "mocha-retry",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "a way to retry tests",
   "main": "index.js",
   "author": "Giovanni Bassi <giggio@giggio.net>",

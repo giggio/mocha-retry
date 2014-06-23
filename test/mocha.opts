@@ -1,4 +1,5 @@
 --compilers coffee:coffee-script/register
+--require test/_specHelper.coffee
 --ui mocha-retry
 --timeout 1000
 --reporter spec

@@ -1,7 +1,4 @@
 Q = require 'q'
-chai = require 'chai'
-chai.should()
-#debugger
 times = 0
 
 #describe.only 'Some only retry suite', ->
@@ -103,3 +100,49 @@ describe 2, 'A retry suite with a sub suite', ->
       if times % 3 isnt 0
         return done new Error "not divisible by 3"
       done()
+
+describe 'Using global default retry', ->
+  global.DEFAULT_RETRY = 2
+  before -> times = 0
+  describe 'inner suite (needed to apply global retry)', ->
+    it 'works with a retried test not async', ->
+      times++
+      if times % 2 isnt 0 then throw new Error "not even"
+    it 'works with a retried test with a promise', ->
+      times++
+      Q.fcall -> if times % 2 isnt 0 then throw new Error "not even"
+    it 'works with a retried test with callback', (done) ->
+      times++
+      if times % 2 isnt 0
+        return done new Error "not even"
+      done()
+delete global.DEFAULT_RETRY
+
+describe 'With global default retry but overriding it', ->
+  global.DEFAULT_RETRY = 2
+  before -> times = 0
+  describe 3, 'inner suite with specific retry (needed to apply global retry)', ->
+    it 'works with a retried test not async', ->
+      times++
+      if times % 3 isnt 0 then throw new Error "not three"
+    it 'works with a retried test with a promise', ->
+      times++
+      Q.fcall -> if times % 3 isnt 0 then throw new Error "not three"
+    it 'works with a retried test with callback', (done) ->
+      times++
+      if times % 3 isnt 0
+        return done new Error "not three"
+      done()
+  describe 'inner suite with tests that specify retry (needed to apply global retry)', ->
+    it 3, 'works with a retried test not async', ->
+      times++
+      if times % 3 isnt 0 then throw new Error "not three"
+    it 3, 'works with a retried test with a promise', ->
+      times++
+      Q.fcall -> if times % 3 isnt 0 then throw new Error "not three"
+    it 3, 'works with a retried test with callback', (done) ->
+      times++
+      if times % 3 isnt 0
+        return done new Error "not three"
+      done()
+delete global.DEFAULT_RETRY

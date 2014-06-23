@@ -23,6 +23,8 @@ module.exports = interfaces.bddretry = (suite) ->
         times = undefined
       if suites[0].times? and !times?
         times = suites[0].times
+      if context.DEFAULT_RETRY? and !times?
+        times = context.DEFAULT_RETRY
       asuite = Suite.create(suites[0], title)
       asuite.times = times
       asuite.file = file

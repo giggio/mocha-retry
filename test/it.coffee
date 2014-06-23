@@ -1,7 +1,4 @@
 Q = require 'q'
-chai = require 'chai'
-chai.should()
-#debugger
 times = 0
 describe 'A non retry suite', ->
   it 'works with a normal, non retry test', -> true
