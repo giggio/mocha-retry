@@ -75,6 +75,6 @@ Until then either use my version of mocha from which I did the pull request or i
 
 ## License
 
-This software is open source, [licensed at GPL V2](https://github.com/giggio/mocha-retry/blob/master/LICENSE.txt). Check out the terms of the license before you contribute, fork, copy or do anything
+This software is open source, [licensed at Apache 2.0](https://github.com/giggio/mocha-retry/blob/master/LICENSE.txt). Check out the terms of the license before you contribute, fork, copy or do anything
 with the code. If you decide to contribute you agree to grant copyright of all your contribution to this project, and agree to
-mention clearly if do not agree to these terms. Your work will be licensed with the project at GPL V2, along the rest of the code.
+mention clearly if do not agree to these terms. Your work will be licensed with the project at Apache 2.0, along the rest of the code.
