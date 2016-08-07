@@ -1,4 +1,12 @@
-﻿# Mocha Retry
+﻿# DEPRECATED
+
+See [http://mochajs.org/#retry-tests](http://mochajs.org/#retry-tests).
+
+**Notice:** This library is deprecated. Automatic retries are now a built-in feature of Mocha via `this.retries(num)`, and we recommend that you use that instead. See [Mocha's documentation](http://mochajs.org/#retry-tests) for more details. 
+
+The `mocha-retry` library will remain as-is to support existing users, but it will not see any further updates.
+
+# Mocha Retry
 
 This is the repo for Mocha Retry project.
 
